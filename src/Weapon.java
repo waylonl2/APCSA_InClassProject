@@ -2,8 +2,11 @@ public class Weapon {
     private int potency;
     private int weight;
     private int manaCost;
+    private int originalPotency;
+    private String weaponChoice;
 
     public Weapon(String weapon) {
+        weaponChoice = weapon;
         if (weapon.equals("sword")) {
             potency = 4;
             weight = 3;
@@ -14,15 +17,20 @@ public class Weapon {
             manaCost = 80;
         } else if (weapon.equals("bow")) {
             potency = 3;
-            weight = 1;
+            weight = 2;
             manaCost = 50;
         } else {
             System.out.println("invalid weapon");
         }
+        originalPotency = potency;
     }
 
     public int getPotency() {
         return potency;
+    }
+
+    public int getOriginalPotency() {
+        return originalPotency;
     }
 
     public int getWeight() {
@@ -33,8 +41,16 @@ public class Weapon {
         return manaCost;
     }
 
-    public void enchant() {
+    public void setPotency(int potency) {
+        this.potency = potency;
+    }
 
-        potency++;
+    public void showStats() {
+        System.out.println("Weapon: " + weaponChoice);
+        System.out.println("--------------------");
+        System.out.println("Potency - " + potency);
+        System.out.println("Weight - " + weight);
+        System.out.println("Mana Cost - " + manaCost);
+        System.out.println("--------------------");
     }
 }

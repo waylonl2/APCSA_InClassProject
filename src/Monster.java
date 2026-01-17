@@ -19,21 +19,39 @@ public class Monster {
         health = num;
     }
 
-    public void attack(Adventurer adventurer) {
-        adventurer.reduceHealth(1);
+    public void attackBuff() {
+        attack++;
     }
 
-    public void round(boolean attackResult) {
+    public void attack(Adventurer adventurer) {
+        adventurer.setHealth(adventurer.getHealth() - 1);
+        System.out.println("Monster attacks adventurer for " + getAttack());
+    }
+
+    public void turn(Adventurer adventurer) {
+        setHealth(getHealth() - 1);
+        System.out.println("Monster takes damage!");
         boolean attackBack;
-        health--;
         double attackChance = Math.random();
-        if (attackChance >= 0.5) {
+        if (attackChance >= 0.6) {
             attackBack = true;
         } else {
             attackBack = false;
         }
         if (attackBack) {
-            attack()
+            attack(adventurer);
         }
+        double buffChance = Math.random();
+        if (buffChance >= 0.9) {
+            attackBuff();
+            System.out.println("Monster buffed itself! Attack went up by 1!");
+        }
+    }
+
+    public void showStats() {
+        System.out.println("--------------------");
+        System.out.println("Monster's stats: ");
+        System.out.println("Health: " + getHealth());
+        System.out.println("Attack: " + getAttack());
     }
 }
